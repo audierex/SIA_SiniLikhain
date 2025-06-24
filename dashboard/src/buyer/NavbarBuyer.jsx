@@ -5,7 +5,7 @@ function Navbar() {
   const [openDialog, setOpenDialog] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = JSON.parse(localStorage.getItem("user")) || JSON.parse(sessionStorage.getItem("user"));
 
   const handleLogoutClick = () => {
     if (!user) {
@@ -17,6 +17,7 @@ function Navbar() {
 
   const handleConfirmLogout = () => {
     localStorage.removeItem("user");
+    sessionStorage.removeItem("user");
     setOpenDialog(false);
     setOpenSnackbar(true);
     setTimeout(() => {

@@ -46,8 +46,8 @@ function NavbarArtisan() {
           <Button color="inherit" component={Link} to="/artisan" className="navbar-button">
             Home
           </Button>
-          <Button color="inherit" component={Link} to="/addproduct" className="navbar-button">
-            Products
+          <Button color="inherit" component={Link} to="/AddProduct" className="navbar-button">
+            My Products
           </Button>
           <Button color="inherit" component={Link} to="/aboutartisan" className="navbar-button">
             About

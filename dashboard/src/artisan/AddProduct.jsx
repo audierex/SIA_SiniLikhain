@@ -16,7 +16,14 @@ function AddProduct() {
   const [openForm, setOpenForm] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const user = JSON.parse(localStorage.getItem("user"));
+  // Get user from localStorage or sessionStorage
+  let user = null;
+  try {
+    user = JSON.parse(localStorage.getItem("user")) || JSON.parse(sessionStorage.getItem("user"));
+  } catch (e) {
+    user = null;
+  }
+
   const navigate = useNavigate();
 
   useEffect(() => {
