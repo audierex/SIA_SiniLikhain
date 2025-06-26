@@ -214,29 +214,39 @@ function Admin() {
           </>
         )}{view === "buyer" && (
           <div>
-            <h1 className="text-2xl font-bold mb-4 flex items-center">
-              <FontAwesomeIcon icon={faUser} className="mr-2" />
-              Buyers
+            <h1 className="text-2xl font-bold mb-6 flex items-center">
+              <FontAwesomeIcon icon={faUser} className="mr-3 text-blue-600" />
+              Buyers Management
             </h1>
-            <div className={`bg-white rounded-lg shadow-md overflow-hidden ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-100' : ''}`}>
+            <div className={`rounded-xl shadow-lg overflow-hidden border ${darkMode ? 'dark:bg-[#292930] dark:text-gray-100 border-gray-700' : 'bg-white border-gray-200'}`}>
+              <div className="p-5 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <h2 className="text-lg font-semibold">All Buyers ({buyers.length})</h2>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                  })}
+                </div>
+              </div>
               <div className="overflow-x-auto">
-                <table className={`w-full text-left ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-100' : 'text-black'}`}>
-                  <thead className={`bg-gray-50 border-b ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-300' : 'text-black'}`}>
+                <table className={`w-full text-left`}>
+                  <thead className={`${darkMode ? 'bg-[#23232b] text-gray-300' : 'bg-gray-50 text-gray-600'}`}>
                     <tr>
-                      <th className="px-6 py-3 font-medium text-black">Username</th>
-                      <th className="px-6 py-3 font-medium text-black">Email</th>
-                      <th className="px-6 py-3 font-medium text-black">Phone Number</th>
-                      <th className="px-6 py-3 font-medium text-black">Password</th>
-                      <th className="px-6 py-3 font-medium text-black">Actions</th>
+                      <th className="px-6 py-4 font-medium">Username</th>
+                      <th className="px-6 py-4 font-medium">Email</th>
+                      <th className="px-6 py-4 font-medium">Phone Number</th>
+                      <th className="px-6 py-4 font-medium">Password</th>
+                      <th className="px-6 py-4 font-medium">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : ''} text-black`}>
+                  <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
                     {buyers.map(u => (
-                      <tr key={u._id} className={`hover:bg-gray-50 ${darkMode ? 'dark:hover:bg-[#23232b] dark:text-gray-100' : ''}`}>
-                        <td className="px-6 py-4">
+                      <tr key={u._id} className={`${darkMode ? 'text-gray-300 hover:bg-[#2a2a33]' : 'text-gray-700 hover:bg-gray-50'} transition-colors`}>
+                        <td className="px-6 py-4 font-medium">
                           {editUserId === u._id ? (
                             <input 
-                              className="border rounded px-2 py-1 w-full"
+                              className={`border rounded px-3 py-2 w-full ${darkMode ? 'bg-[#3a3a43] border-gray-700 text-white' : 'bg-white border-gray-300'}`}
                               name="username" 
                               value={editUserData.username} 
                               onChange={handleEditChange} 
@@ -246,7 +256,7 @@ function Admin() {
                         <td className="px-6 py-4">
                           {editUserId === u._id ? (
                             <input 
-                              className="border rounded px-2 py-1 w-full"
+                              className={`border rounded px-3 py-2 w-full ${darkMode ? 'bg-[#3a3a43] border-gray-700 text-white' : 'bg-white border-gray-300'}`}
                               name="email" 
                               value={editUserData.email || u.email || ''} 
                               onChange={handleEditChange} 
@@ -256,7 +266,7 @@ function Admin() {
                         <td className="px-6 py-4">
                           {editUserId === u._id ? (
                             <input 
-                              className="border rounded px-2 py-1 w-full"
+                              className={`border rounded px-3 py-2 w-full ${darkMode ? 'bg-[#3a3a43] border-gray-700 text-white' : 'bg-white border-gray-300'}`}
                               name="phone" 
                               value={editUserData.phone || u.phone || ''} 
                               onChange={handleEditChange} 
@@ -264,44 +274,48 @@ function Admin() {
                           ) : u.phone || ''}
                         </td>
                         <td className="px-6 py-4">
-                          <span>{'••••••'}</span>
+                          <span className="px-3 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">••••••</span>
                         </td>
                         <td className="px-6 py-4">
                           {editUserId === u._id ? (
                             <div className="flex space-x-2">
                               <button 
                                 onClick={() => handleEditSave(u._id)}
-                                className={`bg-green-500 hover:bg-green-600 px-3 py-1 rounded flex items-center`}
-                                style={{ color: darkMode ? '#fff' : '#000', border: 'none', outline: 'none' }}
+                                className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg flex items-center transition-colors shadow-md"
                               >
-                                <FontAwesomeIcon icon={faSave} className="mr-1 h-3 w-3" style={{ color: darkMode ? '#fff' : '#000' }} />
-                                Save
+                                <FontAwesomeIcon icon={faSave} className="mr-2" style={{color: "white"}} />
+                                <span style={{color: "white"}}>Save</span>
                               </button>
                               <button 
                                 onClick={() => setEditUserId(null)}
-                                className={`bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded flex items-center`}
-                                style={{ color: darkMode ? '#fff' : '#000', border: 'none', outline: 'none' }}
+                                className={`${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-300 hover:bg-gray-400'} px-3 py-2 rounded-lg flex items-center transition-colors shadow-md`}
                               >
-                                <FontAwesomeIcon icon={faBan} className="mr-1 h-3 w-3" style={{ color: darkMode ? '#fff' : '#000' }} />
-                                Cancel
+                                <FontAwesomeIcon icon={faBan} className="mr-2" style={{color: darkMode ? "white" : "black"}} />
+                                <span style={{color: darkMode ? "white" : "black"}}>Cancel</span>
                               </button>
                             </div>
                           ) : (
                             <div className="flex space-x-2">
-                              {/* Remove Edit button, only show Delete */}
                               <button 
                                 onClick={() => handleDeleteUser(u._id)}
-                                className={`bg-red-500 hover:bg-red-600 px-3 py-1 rounded flex items-center`}
-                                style={{ color: '#fff', background: '#c1121f', fontWeight: 600, boxShadow: 'none', border: 'none', outline: 'none' }}
+                                className="bg-red-600 hover:bg-red-700 px-3 py-2 rounded-lg flex items-center transition-colors shadow-md"
+                                style={{backgroundColor: "#dc2626"}}
                               >
-                                <FontAwesomeIcon icon={faTrash} className="mr-1 h-3 w-3" style={{ color: '#fff' }} />
-                                Delete
+                                <FontAwesomeIcon icon={faTrash} className="mr-2" style={{color: "white"}} />
+                                <span style={{color: "white"}}>Delete</span>
                               </button>
                             </div>
                           )}
                         </td>
                       </tr>
                     ))}
+                    {buyers.length === 0 && (
+                      <tr>
+                        <td colSpan="5" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                          No buyers found
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -309,29 +323,39 @@ function Admin() {
           </div>
         )}{view === "artisan" && (
           <div>
-            <h1 className="text-2xl font-bold mb-4 flex items-center">
-              <FontAwesomeIcon icon={faPalette} className="mr-2" />
-              Artisans
+            <h1 className="text-2xl font-bold mb-6 flex items-center">
+              <FontAwesomeIcon icon={faPalette} className="mr-3 text-purple-600" />
+              Artisans Management
             </h1>
-            <div className={`bg-white rounded-lg shadow-md overflow-hidden ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-100' : ''}`}>
+            <div className={`rounded-xl shadow-lg overflow-hidden border ${darkMode ? 'dark:bg-[#292930] dark:text-gray-100 border-gray-700' : 'bg-white border-gray-200'}`}>
+              <div className="p-5 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <h2 className="text-lg font-semibold">All Artisans ({artisans.length})</h2>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                  })}
+                </div>
+              </div>
               <div className="overflow-x-auto">
-                <table className={`w-full text-left ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-100' : 'text-black'}`}>
-                  <thead className={`bg-gray-50 border-b ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-300' : 'text-black'}`}>
+                <table className={`w-full text-left`}>
+                  <thead className={`${darkMode ? 'bg-[#23232b] text-gray-300' : 'bg-gray-50 text-gray-600'}`}>
                     <tr>
-                      <th className="px-6 py-3 font-medium text-black">Username</th>
-                      <th className="px-6 py-3 font-medium text-black">Email</th>
-                      <th className="px-6 py-3 font-medium text-black">Phone Number</th>
-                      <th className="px-6 py-3 font-medium text-black">Password</th>
-                      <th className="px-6 py-3 font-medium text-black">Actions</th>
+                      <th className="px-6 py-4 font-medium">Username</th>
+                      <th className="px-6 py-4 font-medium">Email</th>
+                      <th className="px-6 py-4 font-medium">Phone Number</th>
+                      <th className="px-6 py-4 font-medium">Password</th>
+                      <th className="px-6 py-4 font-medium">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : ''} text-black`}>
+                  <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
                     {artisans.map(u => (
-                      <tr key={u._id} className={`hover:bg-gray-50 ${darkMode ? 'dark:hover:bg-[#23232b] dark:text-gray-100' : ''}`}>
-                        <td className="px-6 py-4">
+                      <tr key={u._id} className={`${darkMode ? 'text-gray-300 hover:bg-[#2a2a33]' : 'text-gray-700 hover:bg-gray-50'} transition-colors`}>
+                        <td className="px-6 py-4 font-medium">
                           {editUserId === u._id ? (
                             <input 
-                              className="border rounded px-2 py-1 w-full"
+                              className={`border rounded px-3 py-2 w-full ${darkMode ? 'bg-[#3a3a43] border-gray-700 text-white' : 'bg-white border-gray-300'}`}
                               name="username" 
                               value={editUserData.username} 
                               onChange={handleEditChange} 
@@ -341,7 +365,7 @@ function Admin() {
                         <td className="px-6 py-4">
                           {editUserId === u._id ? (
                             <input 
-                              className="border rounded px-2 py-1 w-full"
+                              className={`border rounded px-3 py-2 w-full ${darkMode ? 'bg-[#3a3a43] border-gray-700 text-white' : 'bg-white border-gray-300'}`}
                               name="email" 
                               value={editUserData.email || u.email || ''} 
                               onChange={handleEditChange} 
@@ -351,7 +375,7 @@ function Admin() {
                         <td className="px-6 py-4">
                           {editUserId === u._id ? (
                             <input 
-                              className="border rounded px-2 py-1 w-full"
+                              className={`border rounded px-3 py-2 w-full ${darkMode ? 'bg-[#3a3a43] border-gray-700 text-white' : 'bg-white border-gray-300'}`}
                               name="phone" 
                               value={editUserData.phone || u.phone || ''} 
                               onChange={handleEditChange} 
@@ -359,44 +383,48 @@ function Admin() {
                           ) : u.phone || ''}
                         </td>
                         <td className="px-6 py-4">
-                          <span>{'••••••'}</span>
+                          <span className="px-3 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300">••••••</span>
                         </td>
                         <td className="px-6 py-4">
                           {editUserId === u._id ? (
                             <div className="flex space-x-2">
                               <button 
                                 onClick={() => handleEditSave(u._id)}
-                                className={`bg-green-500 hover:bg-green-600 px-3 py-1 rounded flex items-center`}
-                                style={{ color: darkMode ? '#fff' : '#000', border: 'none', outline: 'none' }}
+                                className="bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-lg flex items-center transition-colors shadow-md"
                               >
-                                <FontAwesomeIcon icon={faSave} className="mr-1 h-3 w-3" style={{ color: darkMode ? '#fff' : '#000' }} />
-                                Save
+                                <FontAwesomeIcon icon={faSave} className="mr-2" style={{color: "white"}} />
+                                <span style={{color: "white"}}>Save</span>
                               </button>
                               <button 
                                 onClick={() => setEditUserId(null)}
-                                className={`bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded flex items-center`}
-                                style={{ color: darkMode ? '#fff' : '#000', border: 'none', outline: 'none' }}
+                                className={`${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-300 hover:bg-gray-400'} px-3 py-2 rounded-lg flex items-center transition-colors shadow-md`}
                               >
-                                <FontAwesomeIcon icon={faBan} className="mr-1 h-3 w-3" style={{ color: darkMode ? '#fff' : '#000' }} />
-                                Cancel
+                                <FontAwesomeIcon icon={faBan} className="mr-2" style={{color: darkMode ? "white" : "black"}} />
+                                <span style={{color: darkMode ? "white" : "black"}}>Cancel</span>
                               </button>
                             </div>
                           ) : (
                             <div className="flex space-x-2">
-                              {/* Remove Edit button, only show Delete */}
                               <button 
                                 onClick={() => handleDeleteUser(u._id)}
-                                className={`bg-red-500 hover:bg-red-600 px-3 py-1 rounded flex items-center`}
-                                style={{ color: '#fff', background: '#c1121f', fontWeight: 600, boxShadow: 'none', border: 'none', outline: 'none' }}
+                                className="bg-red-600 hover:bg-red-700 px-3 py-2 rounded-lg flex items-center transition-colors shadow-md"
+                                style={{backgroundColor: "#dc2626"}}
                               >
-                                <FontAwesomeIcon icon={faTrash} className="mr-1 h-3 w-3" style={{ color: '#fff' }} />
-                                Delete
+                                <FontAwesomeIcon icon={faTrash} className="mr-2" style={{color: "white"}} />
+                                <span style={{color: "white"}}>Delete</span>
                               </button>
                             </div>
                           )}
                         </td>
                       </tr>
                     ))}
+                    {artisans.length === 0 && (
+                      <tr>
+                        <td colSpan="5" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                          No artisans found
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -404,55 +432,90 @@ function Admin() {
           </div>
         )}{view === "crud" && (
           <div>
-            <h1 className="text-2xl font-bold mb-4 flex items-center">
-              <FontAwesomeIcon icon={faBoxesStacked} className="mr-2" />
-              Products
+            <h1 className="text-2xl font-bold mb-6 flex items-center">
+              <FontAwesomeIcon icon={faBoxesStacked} className="mr-3 text-amber-600" />
+              Products Management
             </h1>
-            <div className={`bg-white rounded-lg shadow-md overflow-hidden ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-100' : ''}`}>
+            
+            <div className={`rounded-xl shadow-lg overflow-hidden border ${darkMode ? 'dark:bg-[#292930] dark:text-gray-100 border-gray-700' : 'bg-white border-gray-200'}`}>
+              <div className="p-5 border-b border-gray-200 dark:border-gray-700 flex flex-wrap justify-between items-center">
+                <h2 className="text-lg font-semibold mb-2 sm:mb-0">All Products ({products.length})</h2>
+                <div className="flex items-center flex-wrap">
+                  <div className="mr-6 mb-2 sm:mb-0 bg-green-50 dark:bg-green-900/30 px-3 py-1.5 rounded-full flex items-center">
+                    <span className="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                    <span className={`${darkMode ? 'text-green-200' : 'text-green-700'} text-sm font-medium`}>
+                      Approved: {products.filter(p => p.approved).length}
+                    </span>
+                  </div>
+                  <div className="bg-amber-50 dark:bg-amber-900/30 px-3 py-1.5 rounded-full flex items-center">
+                    <span className="w-3 h-3 rounded-full bg-amber-500 mr-2"></span>
+                    <span className={`${darkMode ? 'text-amber-200' : 'text-amber-700'} text-sm font-medium`}>
+                      Pending: {products.filter(p => !p.approved).length}
+                    </span>
+                  </div>
+                </div>
+              </div>
               <div className="overflow-x-auto">
-                <table className={`w-full text-left ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-100' : ''}`} style={{ color: '#000' }}>
-                  <thead className={`bg-gray-50 border-b ${darkMode ? 'dark:bg-[#23232b] dark:text-gray-300' : ''}`} style={{ color: '#000' }}>
-                    <tr className="text-black" style={{ color: '#000' }}>
-                      <th className="px-6 py-3 font-medium" style={{ color: '#000' }}>Name</th>
-                      <th className="px-6 py-3 font-medium" style={{ color: '#000' }}>Artisan</th>
-                      <th className="px-6 py-3 font-medium" style={{ color: '#000' }}>Category</th>
-                      <th className="px-6 py-3 font-medium" style={{ color: '#000' }}>Status</th>
-                      <th className="px-6 py-3 font-medium" style={{ color: '#000' }}>Actions</th>
+                <table className={`w-full text-left`}>
+                  <thead className={`${darkMode ? 'bg-[#23232b] text-gray-300' : 'bg-gray-50 text-gray-600'}`}>
+                    <tr>
+                      <th className="px-6 py-4 font-medium">Name</th>
+                      <th className="px-6 py-4 font-medium">Artisan</th>
+                      <th className="px-6 py-4 font-medium">Category</th>
+                      <th className="px-6 py-4 font-medium">Status</th>
+                      <th className="px-6 py-4 font-medium">Actions</th>
                     </tr>
                   </thead>
-                  <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : ''} text-black`} style={{ color: '#000' }}>
+                  <tbody className={`divide-y ${darkMode ? 'divide-gray-700' : 'divide-gray-200'}`}>
                     {products.map(p => (
-                      <tr key={p._id} className={`hover:bg-gray-50 ${darkMode ? 'dark:hover:bg-[#23232b]' : ''} text-black`} style={{ color: '#000' }}>
-                        <td className="px-6 py-4" style={{ color: '#000' }}>{p.name}</td>
-                        <td className="px-6 py-4" style={{ color: '#000' }}>{p.artisan}</td>
-                        <td className="px-6 py-4" style={{ color: '#000' }}>{p.category}</td>
-                        <td className="px-6 py-4" style={{ color: '#000' }}>
-                          <span className={`px-2 py-1 rounded-full text-xs font-semibold
-                            ${p.approved ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'}`}
-                            style={{ color: '#000' }}>
+                      <tr key={p._id} className={`${darkMode ? 'text-gray-300 hover:bg-[#2a2a33]' : 'text-gray-700 hover:bg-gray-50'} transition-colors`}>
+                        <td className="px-6 py-4 font-medium">{p.name}</td>
+                        <td className="px-6 py-4">{p.artisan}</td>
+                        <td className="px-6 py-4">
+                          <span className={`px-3 py-1 text-xs font-medium rounded-full ${
+                            darkMode 
+                              ? p.category === 'Painting' ? 'bg-blue-900 text-blue-200' : 
+                                p.category === 'Sculpture' ? 'bg-purple-900 text-purple-200' : 
+                                p.category === 'Pottery' ? 'bg-orange-900 text-orange-200' : 
+                                'bg-gray-700 text-gray-300'
+                              : p.category === 'Painting' ? 'bg-blue-100 text-blue-800' : 
+                                p.category === 'Sculpture' ? 'bg-purple-100 text-purple-800' : 
+                                p.category === 'Pottery' ? 'bg-orange-100 text-orange-800' : 
+                                'bg-gray-100 text-gray-800'
+                          }`}>
+                            {p.category}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-semibold inline-flex items-center
+                            ${p.approved 
+                                ? darkMode ? 'bg-green-900 text-green-200' : 'bg-green-100 text-green-800' 
+                                : darkMode ? 'bg-amber-900 text-amber-200' : 'bg-amber-100 text-amber-800'
+                            }`}>
+                            <span className={`w-2 h-2 rounded-full mr-1.5 ${p.approved ? 'bg-green-500' : 'bg-amber-500'}`}></span>
                             {p.approved ? 'Approved' : 'Pending'}
                           </span>
                         </td>
-                        <td className="px-6 py-4" style={{ color: '#000' }}>
-                          <div className="flex space-x-2">
+                        <td className="px-6 py-4">
+                          <div className="flex flex-wrap gap-2">
                             {!p.approved && (
                               <button 
                                 onClick={() => handleApprove(p._id)} 
-                                className="bg-green-600 hover:bg-green-700 px-3 py-1 rounded flex items-center"
-                                style={{ color: '#fff', border: 'none', outline: 'none', fontWeight: 700, backgroundColor: '#386641' }}
+                                className="bg-green-600 hover:bg-green-700 px-3 py-2 rounded-lg flex items-center transition-colors shadow-md"
+                                style={{backgroundColor: "#16a34a"}}
                               >
-                                <FontAwesomeIcon icon={faCheck} className="mr-1 h-3 w-3" style={{ color: '#fff' }} />
-                                Approve
+                                <FontAwesomeIcon icon={faCheck} className="mr-2" style={{color: "white"}} />
+                                <span style={{color: "white"}}>Approve</span>
                               </button>
                             )}
                             {p.approved && (
                               <button 
                                 onClick={() => handleReject(p._id)} 
-                                className="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded flex items-center"
-                                style={{ color: '#fff', border: 'none', outline: 'none', fontWeight: 700, backgroundColor: '#926c15' }}
+                                className="bg-amber-600 hover:bg-amber-700 px-3 py-2 rounded-lg flex items-center transition-colors shadow-md"
+                                style={{backgroundColor: "#d97706"}}
                               >
-                                <FontAwesomeIcon icon={faTimes} className="mr-1 h-3 w-3" style={{ color: '#fff' }} />
-                                Reject
+                                <FontAwesomeIcon icon={faTimes} className="mr-2" style={{color: "white"}} />
+                                <span style={{color: "white"}}>Reject</span>
                               </button>
                             )}
                             <button 
@@ -462,16 +525,26 @@ function Admin() {
                                   setProducts(products.filter(prod => prod._id !== p._id));
                                 }
                               }} 
-                              className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded flex items-center"
-                              style={{ color: '#fff', background: '#c1121f', fontWeight: 600, boxShadow: 'none', border: 'none', outline: 'none' }}
+                              className="bg-red-600 hover:bg-red-700 px-3 py-2 rounded-lg flex items-center transition-colors shadow-md"
+                              style={{backgroundColor: "#dc2626"}}
                             >
-                              <FontAwesomeIcon icon={faTrash} className="mr-1 h-3 w-3" style={{ color: '#fff' }} />
-                              Delete
+                              <FontAwesomeIcon icon={faTrash} className="mr-2" style={{color: "white"}} />
+                              <span style={{color: "white"}}>Delete</span>
                             </button>
                           </div>
                         </td>
                       </tr>
                     ))}
+                    {products.length === 0 && (
+                      <tr>
+                        <td colSpan="5" className="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                          <div className="flex flex-col items-center justify-center">
+                            <FontAwesomeIcon icon={faBoxesStacked} className="text-4xl mb-3 opacity-30" />
+                            <p>No products found</p>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>
