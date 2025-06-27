@@ -17,7 +17,11 @@
     "@mui/icons-material": "^7.0.2",
     "@mui/material": "^7.0.2",
     "@tailwindcss/vite": "^4.1.10",
+<<<<<<< HEAD
     "axios": "^1.10.0",
+=======
+    "axios": "^1.9.0",
+>>>>>>> 26978da28b74d456832b9464716697e8e8812a30
     "chart.js": "^4.5.0",
     "gsap": "^3.13.0",
     "react": "^19.0.0",
