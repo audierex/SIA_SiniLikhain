@@ -33,6 +33,7 @@ function NavbarArtisan({ showLinks = true }) {
   const navLinks = [
     { to: "/artisan", label: "Home" },
     { to: "/AddProduct", label: "My Products" },
+    { to: "/artisanprofile", label: "Profile" },
     { to: "/aboutartisan", label: "About" },
   ];
 

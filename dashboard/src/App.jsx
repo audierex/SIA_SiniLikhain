@@ -12,6 +12,7 @@ import Artisan from "./artisan/Artisan";
 import Cart from "./buyer/Cart";
 import RegisterArtisan from "./pages/RegisterArtisan";
 import RegisterBuyer from "./pages/RegisterBuyer";
+import ArtisanProfile from "./artisan/ArtisanProfile";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/Buyer" element={<Buyer />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/Artisan" element={<Artisan />} />
+        <Route path="/artisanprofile" element={<ArtisanProfile />} />
         <Route path="/registerartisan" element={<RegisterArtisan />} />
         <Route path="/registerbuyer" element={<RegisterBuyer />} />
       </Routes>

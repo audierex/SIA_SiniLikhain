@@ -86,15 +86,23 @@ function Artisan() {
           <br />
           in humble tools, the birth of brilliance.
         </h1>
-        <a
-          href="/aboutartisan"
-          className="inline-block px-8 py-3 border border-white text-white font-[source-code-pro,monospace] text-base tracking-widest rounded bg-transparent hover:bg-white hover:text-black hover:!bg-black hover:!text-white transition-colors duration-200 group"
-          style={{ transition: "color 0.2s, background 0.2s" }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = "#000")}
-          onMouseLeave={(e) => (e.currentTarget.style.color = "")}
-        >
-          VIEW MORE
-        </a>
+        <div className="flex gap-4 flex-wrap justify-center">
+          <a
+            href="/aboutartisan"
+            className="inline-block px-8 py-3 border border-white text-white font-[source-code-pro,monospace] text-base tracking-widest rounded bg-transparent hover:bg-white hover:text-black hover:!bg-black hover:!text-white transition-colors duration-200 group"
+            style={{ transition: "color 0.2s, background 0.2s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#000")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "")}
+          >
+            VIEW MORE
+          </a>
+          <a
+            href="/artisanprofile"
+            className="inline-block px-8 py-3 border border-white text-white font-[source-code-pro,monospace] text-base tracking-widest rounded bg-white text-black hover:opacity-90 transition-opacity duration-200"
+          >
+            MY INVENTORY
+          </a>
+        </div>
       </main>
     </div>
   );
